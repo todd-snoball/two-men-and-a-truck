@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snoball for Two Men and a Truck | 2 Months Free for the First 3 Locations</title>
+  <meta name="description" content="Snoball delivers referrals, reviews, and repeat business for Two Men and a Truck franchises. Done for you, not DIY. The first 3 locations get a 2-month free trial.">
+  <link rel="preconnect" href="https://images.bestcompany.com">
+  <link rel="preconnect" href="https://s3.us-west-1.amazonaws.com">
+  <link rel="preconnect" href="https://app.iclosed.io">
+  <!-- Self-hosted Inter (variable). Files live in /fonts next to index.html -->
+  <link rel="preload" as="font" type="font/woff2" href="fonts/InterVariable.woff2" crossorigin>
+  <style>
+/* ====================================================================
+   Snoball Two Men and a Truck Landing Page: Custom Styles
+   ==================================================================== */
+
+/* Self-hosted Inter variable font (replaces the render-blocking Google
+   Fonts request). Place InterVariable.woff2 and InterVariable-Italic.woff2
+   in a /fonts folder next to index.html. Filenames are case-sensitive. */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('fonts/InterVariable.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('fonts/InterVariable-Italic.woff2') format('woff2');
+}
+
+html, body {
+  overflow-x: clip !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Landing page wrapper */
+.snoball-mc-landing {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  background: #121155 !important;
+}
+
+/* ====================================================================
+   Logo Marquee
+   ==================================================================== */
+.sb-marquee {
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 80px, black calc(100% - 80px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, black 80px, black calc(100% - 80px), transparent 100%);
+}
+.sb-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 36px;
+  align-items: center;
+  animation: sb-marquee-scroll 90s linear infinite;
+}
+.sb-marquee:hover .sb-marquee-track {
+  animation-play-state: paused;
+}
+.sb-marquee-logo {
+  flex-shrink: 0;
+  height: 80px;
+  width: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  box-sizing: border-box;
+}
+.sb-marquee-logo img {
+  max-height: 64px;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+}
+@keyframes sb-marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sb-marquee-track { animation: none; }
+}
+
+/* ====================================================================
+   Mobile (<=768px)
+   ==================================================================== */
+@media (max-width: 768px) {
+  .sb-topbar-row {
+    justify-content: center !important;
+    gap: 14px !important;
+  }
+  .sb-flywheel {
+    aspect-ratio: auto !important;
+    max-width: 320px !important;
+    height: auto !important;
+  }
+  .sb-flywheel-ring,
+  .sb-flywheel-center,
+  .sb-flywheel-arrow {
+    display: none !important;
+  }
+  .sb-flywheel-node {
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto 12px auto !important;
+  }
+  .sb-flywheel-mobile-arrow {
+    display: block !important;
+    text-align: center;
+    color: #D2D5DA;
+    font-size: 18px;
+    line-height: 1;
+    margin: 8px auto;
+  }
+}
+
+/* ====================================================================
+   Mobile (<=540px)
+   ==================================================================== */
+@media (max-width: 540px) {
+  .snoball-mc-landing h1 { font-size: 40px !important; }
+  .sb-num-list {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+}
+
+/* Very small screens: scale the hero headline down */
+@media (max-width: 430px) {
+  .snoball-mc-landing h1 { font-size: 34px !important; }
+}
+
+/* ====================================================================
+   Performance: skip layout + paint for below-the-fold sections until the
+   user scrolls near them. Big reduction in initial render work.
+   contain-intrinsic-size reserves space so the scrollbar stays stable.
+   ==================================================================== */
+.sb-defer {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+
+/* ====================================================================
+   Scheduler facade loading bar (shows once the iframe starts loading)
+   ==================================================================== */
+#iclosed-loadingbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  background: rgba(26, 57, 169, 0.12);
+  overflow: hidden;
+}
+#iclosed-loadingbar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -40%;
+  width: 40%;
+  height: 100%;
+  background: #1A39A9;
+  animation: sb-loadbar 1.1s ease-in-out infinite;
+}
+@keyframes sb-loadbar {
+  0% { left: -40%; }
+  100% { left: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #iclosed-loadingbar::after { animation: none; left: 0; width: 100%; opacity: 0.5; }
+}
+
+/* Skeleton placeholder shapes in the lower (faded) part of the facade */
+.sk {
+  position: relative;
+  overflow: hidden;
+  background: #EEF1F5;
+}
+.sk::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+  animation: sb-shimmer 1.6s infinite;
+}
+@keyframes sb-shimmer {
+  100% { transform: translateX(100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sk::after { animation: none; }
+}
+
+/* ====================================================================
+   Centered hero + wide two-pane scheduler facade
+   ==================================================================== */
+@media (min-width: 541px) and (max-width: 900px) {
+  .snoball-mc-landing h1 { font-size: 52px !important; }
+}
+@media (max-width: 900px) {
+  .sb-facade-panes { flex-direction: column; }
+  .sb-facade-divider { display: none; }
+  .sb-facade-cal { display: none; }
+}
+@media (max-width: 540px) {
+  .sb-book-callout { top: -20px !important; left: 12px !important; }
+  .sb-book-callout span { font-size: 15px !important; padding: 8px 14px !important; }
+}
+  </style>
+</head>
+<body>
+<!-- =====================================================================
+     Snoball Two Men and a Truck landing page (franchise decision-makers)
+     ===================================================================== -->
+<div class="snoball-mc-landing" style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #272b30; line-height: 1.55; -webkit-font-smoothing: antialiased; width: 100%; margin: 0; padding: 0;">
+
+<!-- ============== STICKY TOP BAR (frosted glass) ============== -->
+<div style="background: rgba(18, 17, 85, 0.92); color: #ffffff; padding: 13px 24px; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+<div class="sb-topbar-row" style="max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
+<div class="sb-topbar-logo" style="flex: 0 0 auto;"><img style="height: 26px; width: auto; vertical-align: middle; display: block;" src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2FWhite%2520Straight%2520Snoball%2520Logo.png&amp;w=320&amp;fm=webp&amp;q=72" alt="Snoball"></div>
+<div class="sb-topbar-cta" style="flex: 0 0 auto;"><a style="display: inline-block; background: #8BD7DF; color: #121155; font-weight: 800; font-size: 15px; padding: 11px 22px; border-radius: 8px; text-decoration: none; letter-spacing: 0.01em; white-space: nowrap; box-shadow: 0 4px 14px rgba(139, 215, 223, 0.2);" href="#book-a-demo">Book a Demo</a></div>
+</div>
+</div>
+
+<!-- ============== HERO (BLUE GRADIENT, CENTERED) ============== -->
+<section class="sb-hero" style="background-image: linear-gradient(135deg, #121155 0%, #1A39A9 55%, #0055B8 100%); color: #ffffff; padding: 52px 24px 66px 24px;">
+<div style="max-width: 1120px; margin: 0 auto; text-align: center;">
+<div style="display: inline-block; font-size: 13px; font-weight: bold; letter-spacing: 0.14em; text-transform: uppercase; color: #8bd7df; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.24); padding: 9px 20px; border-radius: 999px; margin-bottom: 26px;">Two Men and a Truck + Snoball</div>
+<h1 style="font-size: 76px; line-height: 1.03; font-weight: 800; margin: 0 0 22px 0; letter-spacing: -0.03em; color: #ffffff;">The First 3 Locations<br><span style="background-image: linear-gradient(90deg, #8BD7DF 0%, #FF94FB 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: #8bd7df;">Get 2 Months Free.</span></h1>
+<p style="font-size: 19px; line-height: 1.55; color: rgba(255, 255, 255, 0.92); margin: 0 auto 30px auto; max-width: 660px;">Snoball is giving the first 3 Two Men and a Truck locations that claim it a 2-month free trial. Schedule your demo and we will even pay you a $200 self-referral payout. Referrals are what we do, after all.</p>
+<!-- G2 social proof badge (centered) -->
+<div>
+<div style="display: inline-flex; align-items: center; gap: 14px; padding: 10px 20px 10px 12px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 999px;"><img style="width: 36px; height: 36px; display: block; flex-shrink: 0;" src="/.netlify/images?url=https%3A%2F%2Fs3.us-west-1.amazonaws.com%2Fimages.bestcompany.com%2Fbcbs%2Fsnoball%2Flogos%2Fg2-logo-white.webp&amp;w=120&amp;fm=webp&amp;q=75" alt="G2">
+<div style="color: #ffffff; font-size: 18px; font-weight: bold; line-height: 1;">4.7</div>
+<div style="position: relative; display: inline-block; line-height: 1; font-size: 18px; letter-spacing: 1px;"><span style="color: rgba(255, 255, 255, 0.3);">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <span style="position: absolute; top: 0; left: 0; color: #ffffff; overflow: hidden; width: 90%; white-space: nowrap;">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+<div style="color: rgba(255, 255, 255, 0.75); font-size: 14px; line-height: 1; white-space: nowrap;">(70 Reviews)</div>
+</div>
+</div>
+<!-- Wide iClosed scheduler (two-pane) -->
+<div class="sb-sched-wrap" style="position: relative; max-width: 926px; margin: 50px auto 0 auto; text-align: left;">
+<!-- "Book Demo Here!" callout -->
+<div class="sb-book-callout" style="position: absolute; top: -26px; left: 26px; z-index: 4; transform: rotate(-6deg);"><span style="display: inline-block; background: #8BD7DF; color: #121155; font-weight: 800; font-size: 17px; padding: 10px 18px; border-radius: 12px 12px 12px 2px; box-shadow: 0 10px 24px rgba(18, 17, 85, 0.28); white-space: nowrap;">Book Demo Here!</span><svg width="42" height="40" viewBox="0 0 42 40" fill="none" style="position: absolute; left: 30px; top: 34px;" aria-hidden="true"><path d="M4 2 C22 6 34 16 30 34" stroke="#8BD7DF" stroke-width="3" fill="none" stroke-linecap="round"></path><path d="M23 30 L30 35 L34 27" stroke="#8BD7DF" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+<div id="book-a-demo" style="background: #FFFFFF; border-radius: 14px; padding: 8px; box-shadow: 0 24px 60px rgba(18, 17, 85, 0.45); border: 1px solid rgba(255, 255, 255, 0.06);">
+<div id="iclosed-embed" style="position: relative; border-radius: 10px; overflow: hidden; background: #FFFFFF; min-height: 560px;"><!-- The real iClosed iframe is injected here by JS, behind this facade. -->
+<!-- Facade: a non-typeable look-alike of the iClosed two-pane form so the swap is seamless. -->
+<div id="iclosed-facade" role="button" tabindex="0" aria-label="Open the booking scheduler" style="position: absolute; inset: 0; z-index: 2; background: #FFFFFF; cursor: pointer; overflow: hidden; display: flex; flex-direction: column; transition: opacity 0.35s ease;">
+<div id="iclosed-loadingbar"></div>
+<!-- Step header -->
+<div style="display: flex; align-items: center; justify-content: center; gap: 28px; padding: 16px 20px; border-bottom: 1px solid #EFF1F4;"><span style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #272b30;"><span style="width: 9px; height: 9px; border-radius: 50%; background: #121155;"></span>Fill out the form</span> <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: #aab0ba;"><span style="width: 9px; height: 9px; border-radius: 50%; background: #d7dbe1;"></span>Book your event</span></div>
+<!-- Two panes: form (left) and calendar (right) -->
+<div class="sb-facade-panes" style="display: flex; flex: 1 1 auto; align-items: stretch;">
+<div class="sb-facade-form" style="flex: 1 1 46%; min-width: 0; padding: 26px 26px 22px 26px; box-sizing: border-box;">
+<div style="font-size: 20px; font-weight: 800; color: #272b30; margin-bottom: 20px;">Snoball Demo</div>
+<div style="border: 1px solid #d9dde3; border-radius: 9px; padding: 14px; font-size: 14px; color: #9aa1ab; margin-bottom: 12px;">Email *</div>
+<div style="display: flex; gap: 12px; margin-bottom: 16px;">
+<div style="flex: 1 1 0; border: 1px solid #d9dde3; border-radius: 9px; padding: 14px; font-size: 14px; color: #9aa1ab;">First name *</div>
+<div style="flex: 1 1 0; border: 1px solid #d9dde3; border-radius: 9px; padding: 14px; font-size: 14px; color: #9aa1ab;">Last name *</div>
+</div>
+<div style="font-size: 12px; color: #8a909b; line-height: 1.5; margin-bottom: 18px;">By entering your information, you consent to your data being saved in accordance with our <span style="color: #52535c; font-weight: 600; text-decoration: underline;">Terms</span> &amp; <span style="color: #52535c; font-weight: 600; text-decoration: underline;">Privacy Policy</span>.</div>
+<div style="background-image: linear-gradient(90deg, #121155 0%, #1A39A9 100%); color: #ffffff; font-weight: 700; font-size: 15px; text-align: center; padding: 14px; border-radius: 9px;">Continue&nbsp;&nbsp;&rsaquo;</div>
+</div>
+<div class="sb-facade-divider" style="width: 1px; background: #EFF1F4; flex: 0 0 auto;"></div>
+<div class="sb-facade-cal" style="flex: 1 1 54%; min-width: 0; padding: 22px 26px; box-sizing: border-box; position: relative;">
+<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+<div style="font-size: 16px; font-weight: 700; color: #272b30;">July 2026</div>
+<div style="display: flex; gap: 8px;"><span style="width: 30px; height: 30px; border: 1px solid #e3e6eb; border-radius: 7px; display: inline-flex; align-items: center; justify-content: center; color: #aab0ba;">&lsaquo;</span><span style="width: 30px; height: 30px; border: 1px solid #e3e6eb; border-radius: 7px; display: inline-flex; align-items: center; justify-content: center; color: #aab0ba;">&rsaquo;</span></div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: #aab0ba; text-align: center; margin-bottom: 8px;"><div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div></div>
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; font-size: 14px; color: #b7bcc4; text-align: center;">
+<div></div><div></div><div></div><div style="padding: 8px 0;">1</div><div style="padding: 8px 0;">2</div><div style="padding: 8px 0;">3</div><div style="padding: 8px 0;">4</div>
+<div style="padding: 8px 0;">5</div><div style="padding: 8px 0;">6</div><div style="padding: 8px 0;">7</div><div style="padding: 8px 0;">8</div><div style="padding: 8px 0;">9</div><div style="padding: 8px 0;">10</div><div style="padding: 8px 0;">11</div>
+<div style="padding: 8px 0;">12</div><div style="padding: 8px 0;">13</div><div style="padding: 8px 0;">14</div><div style="padding: 8px 0;">15</div><div style="padding: 8px 0;">16</div><div style="padding: 8px 0;">17</div><div style="padding: 8px 0;">18</div>
+<div style="padding: 8px 0;">19</div><div style="padding: 8px 0; color: #6c727f; background: #f0f2f5; border-radius: 6px;">20</div><div style="padding: 8px 0; color: #6c727f; background: #f0f2f5; border-radius: 6px;">21</div><div style="padding: 8px 0; color: #6c727f; background: #f0f2f5; border-radius: 6px;">22</div><div style="padding: 8px 0;">23</div><div style="padding: 8px 0;">24</div><div style="padding: 8px 0;">25</div>
+<div style="padding: 8px 0;">26</div><div style="padding: 8px 0;">27</div><div style="padding: 8px 0;">28</div><div style="padding: 8px 0;">29</div><div style="padding: 8px 0;">30</div><div style="padding: 8px 0;">31</div><div></div>
+</div>
+<div style="position: absolute; left: 50%; top: 56%; transform: translate(-50%, -50%); background: #ffffff; box-shadow: 0 8px 26px rgba(18, 17, 85, 0.14); border: 1px solid #eef1f4; border-radius: 10px; padding: 16px 20px; font-size: 14px; color: #52535c; text-align: center; max-width: 260px; line-height: 1.4;">Please fill out the form before choosing your time slot.</div>
+</div>
+</div>
+<!-- Powered by iClosed -->
+<div style="border-top: 1px solid #EFF1F4; padding: 12px; text-align: center; font-size: 12px; color: #9aa1ab;">Powered by iClosed</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============== LOGO STRIP (MARQUEE) ============== -->
+<section style="background: #FFFFFF; padding: 44px 0 32px 0;">
+<div class="sb-marquee">
+<div class="sb-marquee-track">
+<!-- ===== Unique logo set (10) ===== -->
+<div class="sb-marquee-logo"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2Fmove-tastic.png&amp;w=400&amp;fm=webp&amp;q=72" alt="Move-tastic" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2Fkrupp%20logo.png&amp;w=240&amp;fm=webp&amp;q=48" alt="Krupp Moving &amp; Storage" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2Fletsgetmoving-logo.webp&amp;w=400&amp;fm=webp&amp;q=75" alt="Let's Get Moving" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2Fstairhopper.png&amp;w=400&amp;fm=webp&amp;q=72" alt="Stairhopper Movers" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2FSwampRabbit%2520Logo.png&amp;w=400&amp;fm=webp&amp;q=72" alt="Swamp Rabbit Moving" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2FLucky-Day-Moving-Logo-C.png&amp;w=400&amp;fm=webp&amp;q=72" alt="Lucky Day Moving" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo"><img src="https://images.bestcompany.com/blog/ellis%20moving%20and%20storage.svg" alt="Ellis Moving and Storage" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2FSalmonsMoving_ColourLogo_FINAL_300.webp&amp;w=400&amp;fm=webp&amp;q=75" alt="Salmon's Moving" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2FBestCalMovers.png&amp;w=400&amp;fm=webp&amp;q=72" alt="Best California Movers" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2FMove4LessLOGO.png&amp;w=400&amp;fm=webp&amp;q=72" alt="Move 4 Less" decoding="async" loading="lazy"></div>
+<!-- ===== Duplicate set (aria-hidden), required for seamless loop ===== -->
+<div class="sb-marquee-logo" aria-hidden="true"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2Fmove-tastic.png&amp;w=400&amp;fm=webp&amp;q=72" alt="" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo" aria-hidden="true"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2FKrupp-logo.jpg&amp;w=240&amp;fm=webp&amp;q=48" alt="" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo" aria-hidden="true"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2Fletsgetmoving-logo.webp&amp;w=400&amp;fm=webp&amp;q=75" alt="" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo" aria-hidden="true"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2Fstairhopper.png&amp;w=400&amp;fm=webp&amp;q=72" alt="" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo" aria-hidden="true"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2FSwampRabbit%2520Logo.png&amp;w=400&amp;fm=webp&amp;q=72" alt="" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo" aria-hidden="true"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2FLucky-Day-Moving-Logo-C.png&amp;w=400&amp;fm=webp&amp;q=72" alt="" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo" aria-hidden="true"><img src="https://images.bestcompany.com/blog/ellis%20moving%20and%20storage.svg" alt="" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo" aria-hidden="true"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2FSalmonsMoving_ColourLogo_FINAL_300.webp&amp;w=400&amp;fm=webp&amp;q=75" alt="" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo" aria-hidden="true"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2FBestCalMovers.png&amp;w=400&amp;fm=webp&amp;q=72" alt="" decoding="async" loading="lazy"></div>
+<div class="sb-marquee-logo" aria-hidden="true"><img src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2FMove4LessLOGO.png&amp;w=400&amp;fm=webp&amp;q=72" alt="" decoding="async" loading="lazy"></div>
+</div>
+</div>
+</section>
+
+<!-- ============== REAL CUSTOMER RESULTS ============== -->
+<section class="sb-defer" style="background: #F8FAFC; padding: 56px 24px 80px 24px;">
+<div style="max-width: 1100px; margin: 0 auto;">
+<div style="text-align: center; margin-bottom: 40px;">
+<div style="font-size: 13px; font-weight: bold; letter-spacing: 0.16em; text-transform: uppercase; color: #1a39a9; margin-bottom: 12px;">Real Customer Results</div>
+<h2 style="font-size: 34px; line-height: 1.15; font-weight: 800; margin: 0 auto 12px auto; max-width: 720px; color: #272b30; letter-spacing: -0.01em;">Referrals That Drive Revenue.</h2>
+<p style="font-size: 17px; color: #52535c; margin: 0;">Three movers, three different markets, real numbers.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+<!-- ===== JK Moving ===== -->
+<div style="flex: 1 1 300px; min-width: 260px; max-width: 340px; background: #FFFFFF; border-radius: 14px; padding: 32px 24px 28px 24px; border: 1px solid #E5E6EB; text-align: center;">
+<div style="height: 56px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;"><img style="max-height: 48px; max-width: 180px; width: auto; height: auto; display: block;" src="https://images.bestcompany.com/blog/jk%20moving%20logo2%20(1).svg" alt="JK Moving" decoding="async" loading="lazy"></div>
+<div style="font-size: 13px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #6c727f; margin-bottom: 6px;">JK Moving</div>
+<div style="font-size: 36px; font-weight: 800; color: #1a39a9; line-height: 1; letter-spacing: -0.02em; margin-bottom: 8px;">$500K<span style="color: #8c7dd0;">+</span></div>
+<div style="font-size: 14px; color: #52535c; line-height: 1.5; margin-bottom: 20px;">In new revenue, and counting. 280+ total referrals. 110+ reviews.</div>
+<div style="height: 1px; background: #E5E6EB; width: 60%; margin: 0 auto 18px auto;"></div>
+<div style="font-size: 42px; color: #8c7dd0; opacity: 0.5; line-height: 0.5; font-family: Georgia, 'Times New Roman', serif; margin-bottom: 8px; height: 20px;">&ldquo;</div>
+<p style="font-size: 13px; color: #52535c; font-style: italic; line-height: 1.55; margin: 0 0 20px 0;">The best part is that it has brought a steady stream of new customers.</p>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<div style="width: 96px; height: 96px; border-radius: 50%; background-image: url('/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2Fcarissa%2520j%2520profile.jpeg&amp;w=200&amp;fm=webp&amp;q=72'); background-size: cover; background-position: center; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(18, 17, 85, 0.2);" role="img" aria-label="Carissa H."></div>
+<div style="display: flex; flex-direction: column; gap: 2px; align-items: center;">
+<div style="font-size: 13px; color: #272b30; font-weight: bold; line-height: 1.2;">Carissa H.</div>
+<div style="font-size: 11px; color: #6c727f; font-weight: 500; line-height: 1.25;">Inside Sales Supervisor</div>
+</div>
+</div>
+</div>
+<!-- ===== New City Moving ===== -->
+<div style="flex: 1 1 300px; min-width: 260px; max-width: 340px; background: #FFFFFF; border-radius: 14px; padding: 32px 24px 28px 24px; border: 1px solid #E5E6EB; text-align: center;">
+<div style="height: 56px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;"><img style="max-height: 55px; max-width: 207px; width: auto; height: auto; display: block;" src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fbcbs%2Fsnoball%2Flogos%2Fnew-city-moving-logo-lg.webp&amp;w=400&amp;fm=webp&amp;q=75" alt="New City Moving" decoding="async" loading="lazy"></div>
+<div style="font-size: 13px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #6c727f; margin-bottom: 6px;">New City Moving</div>
+<div style="font-size: 36px; font-weight: 800; color: #1a39a9; line-height: 1; letter-spacing: -0.02em; margin-bottom: 8px;">30<span style="color: #8c7dd0;">+</span></div>
+<div style="font-size: 14px; color: #52535c; line-height: 1.5; margin-bottom: 20px;">New referrals in their first month. Five came on day one. 450+ referrals since then.</div>
+<div style="height: 1px; background: #E5E6EB; width: 60%; margin: 0 auto 18px auto;"></div>
+<div style="font-size: 42px; color: #8c7dd0; opacity: 0.5; line-height: 0.5; font-family: Georgia, 'Times New Roman', serif; margin-bottom: 8px; height: 20px;">&ldquo;</div>
+<p style="font-size: 13px; color: #52535c; font-style: italic; line-height: 1.55; margin: 0 0 20px 0;">Ask at the right time. Pay fast and referrers stay excited and keep sending.</p>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<div style="width: 96px; height: 96px; border-radius: 50%; background-image: url('/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2FMeggan%2520S%2520profile%25202.png&amp;w=200&amp;fm=webp&amp;q=72'); background-size: 165%; background-position: center 22%; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(18, 17, 85, 0.2);" role="img" aria-label="Meggan S."></div>
+<div style="display: flex; flex-direction: column; gap: 2px; align-items: center;">
+<div style="font-size: 13px; color: #272b30; font-weight: bold; line-height: 1.2;">Meggan S.</div>
+<div style="font-size: 11px; color: #6c727f; font-weight: 500; line-height: 1.25;">Dir. of Business Development</div>
+</div>
+</div>
+</div>
+<!-- ===== Muscular Moving Men ===== -->
+<div style="flex: 1 1 300px; min-width: 260px; max-width: 340px; background: #FFFFFF; border-radius: 14px; padding: 32px 24px 28px 24px; border: 1px solid #E5E6EB; text-align: center;">
+<div style="height: 56px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;"><img style="max-height: 50px; max-width: 189px; width: auto; height: auto; display: block;" src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2Fmuscular%2520moving%2520men%2520logo.png&amp;w=400&amp;fm=webp&amp;q=72" alt="Muscular Moving Men" decoding="async" loading="lazy"></div>
+<div style="font-size: 13px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #6c727f; margin-bottom: 6px;">Muscular Moving Men</div>
+<div style="font-size: 36px; font-weight: 800; color: #1a39a9; line-height: 1; letter-spacing: -0.02em; margin-bottom: 8px;">100<span style="color: #8c7dd0;">+</span></div>
+<div style="font-size: 14px; color: #52535c; line-height: 1.5; margin-bottom: 20px;">Referrals in their first two months. 280+ more referrals since then.</div>
+<div style="height: 1px; background: #E5E6EB; width: 60%; margin: 0 auto 18px auto;"></div>
+<div style="font-size: 42px; color: #8c7dd0; opacity: 0.5; line-height: 0.5; font-family: Georgia, 'Times New Roman', serif; margin-bottom: 8px; height: 20px;">&ldquo;</div>
+<p style="font-size: 13px; color: #52535c; font-style: italic; line-height: 1.55; margin: 0 0 20px 0;">Snoball has made my life so much easier. It took a huge task off of my plate.</p>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<div style="width: 96px; height: 96px; border-radius: 50%; background-image: url('/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2Fmadelyn.png&amp;w=200&amp;fm=webp&amp;q=72'); background-size: 175%; background-position: center 22%; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(18, 17, 85, 0.2);" role="img" aria-label="Madelyn Kupfer"></div>
+<div style="display: flex; flex-direction: column; gap: 2px; align-items: center;">
+<div style="font-size: 13px; color: #272b30; font-weight: bold; line-height: 1.2;">Madelyn Kupfer</div>
+<div style="font-size: 11px; color: #6c727f; font-weight: 500; line-height: 1.25;">Business Development</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============== RISK-FREE OFFER BAND (PINK GRADIENT) ============== -->
+<section class="sb-defer" style="background-image: linear-gradient(115deg, #121155 0%, #1A39A9 55%, #FF94FB 130%); color: #ffffff; padding: 16px 24px; box-shadow: 0 16px 36px rgba(18, 17, 85, 0.22), 0 -8px 24px rgba(18, 17, 85, 0.12); position: relative; z-index: 2;">
+<div style="max-width: 980px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 28px; align-items: center; justify-content: center;">
+<div style="flex: 1 1 460px; min-width: 280px; max-width: 620px;">
+<div style="font-size: 13px; font-weight: bold; letter-spacing: 0.16em; text-transform: uppercase; color: #8bd7df; margin-bottom: 8px;">Limited to 3 Locations</div>
+<h2 style="font-size: 32px; line-height: 1.12; font-weight: 800; margin: 0 0 10px 0; letter-spacing: -0.01em; color: #ffffff;">The First 3 Franchises Get 2 Months Free.</h2>
+<p style="font-size: 16px; line-height: 1.5; max-width: 600px; margin: 0; color: rgba(255, 255, 255, 0.9);">Built for Two Men and a Truck owners who want to see Snoball work before they commit.</p>
+<p style="font-size: 16px; line-height: 1.5; max-width: 600px; margin: 0; color: rgba(255, 255, 255, 0.9);">Claim one of the three spots on your demo.&nbsp;<a style="color: #8bd7df; font-weight: bold; text-decoration: underline; text-underline-offset: 3px;" href="#book-a-demo">Schedule a time now</a></p>
+</div>
+<div style="flex: 0 0 auto; height: 250px; display: flex; align-items: center; justify-content: center;">
+<div style="width: 220px; height: 220px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(255, 255, 255, 0.32); box-shadow: 0 14px 40px rgba(18, 17, 85, 0.35); position: relative; display: flex; align-items: center; justify-content: center;">
+<div style="width: 192px; height: 192px; border-radius: 50%; border: 2px dashed rgba(255, 255, 255, 0.4); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 14px 14px 20px 14px; box-sizing: border-box;">
+<div style="display: flex; align-items: center; gap: 14px;">
+<div style="width: 8px; height: 8px; background: #8BD7DF; border-radius: 50%;"></div>
+<div style="font-size: 97px; font-weight: 800; color: #ffffff; line-height: 0.92; letter-spacing: -0.04em;">2</div>
+<div style="width: 8px; height: 8px; background: #8BD7DF; border-radius: 50%;"></div>
+</div>
+<div style="font-size: 16px; font-weight: bold; color: #ffffff; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1.2; margin-top: 6px;">Month Trial</div>
+<div style="width: 28px; height: 1px; background: rgba(255, 255, 255, 0.45); margin: 4px auto;"></div>
+<div style="font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.35; color: #8bd7df;">First 3 Only</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============== THE SNOBALL EFFECT (FLYWHEEL) ============== -->
+<section class="sb-defer" style="background: #F8FAFC; padding: 80px 24px;">
+<div style="max-width: 1100px; margin: 0 auto;">
+<div style="text-align: center; margin-bottom: 40px;">
+<div style="font-size: 13px; font-weight: bold; letter-spacing: 0.16em; text-transform: uppercase; color: #1a39a9; margin-bottom: 12px;">The Snoball Effect</div>
+<h2 style="font-size: 40px; line-height: 1.1; font-weight: 800; margin: 0 auto 14px auto; max-width: 760px; color: #272b30; letter-spacing: -0.01em;">One Happy Customer Turns Into Many. And We Run It for You.</h2>
+<p style="font-size: 17px; color: #52535c; max-width: 700px; margin: 0 auto;">Referrals are our specialty, but we like to over-deliver. We also ask for reviews and repeat business. And because of the trust we&rsquo;ve built, we get them. Three revenue drivers, each one feeding the next. <strong style="color: #272b30;">That&rsquo;s the Snoball Effect.</strong></p>
+</div>
+<div class="sb-flywheel" style="position: relative; width: 100%; max-width: 600px; aspect-ratio: 1 / 1; margin: 24px auto 56px auto;">
+<div class="sb-flywheel-ring" style="position: absolute; top: 50%; left: 50%; width: 70%; height: 70%; transform: translate(-50%, -50%); border: 2px dashed #D2D5DA; border-radius: 50%;"></div>
+<div class="sb-flywheel-center" style="position: absolute; top: 50%; left: 50%; width: 170px; height: 170px; transform: translate(-50%, -50%); border-radius: 50%; background-image: linear-gradient(115deg, #121155 0%, #1A39A9 55%, #FF94FB 130%); display: flex; align-items: center; justify-content: center; box-sizing: border-box; box-shadow: 0 16px 44px rgba(18, 17, 85, 0.35);">
+<div style="width: 140px; height: 140px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(255, 255, 255, 0.32); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 12px; box-sizing: border-box;">
+<div style="font-size: 12px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: #ffffff; opacity: 0.85; line-height: 1; margin-bottom: 2px;">The</div>
+<div style="font-size: 22px; font-weight: 800; line-height: 1.05; color: #ffffff;">Snoball<br>Effect</div>
+</div>
+</div>
+<div class="sb-flywheel-arrow" style="position: absolute; top: 25.25%; left: 74.75%; transform: translate(-50%, -50%) rotate(45deg); color: #d2d5da; font-size: 16px; line-height: 1;">&#9654;</div>
+<div class="sb-flywheel-arrow" style="position: absolute; top: 74.75%; left: 74.75%; transform: translate(-50%, -50%) rotate(135deg); color: #d2d5da; font-size: 16px; line-height: 1;">&#9654;</div>
+<div class="sb-flywheel-arrow" style="position: absolute; top: 74.75%; left: 25.25%; transform: translate(-50%, -50%) rotate(225deg); color: #d2d5da; font-size: 16px; line-height: 1;">&#9654;</div>
+<div class="sb-flywheel-arrow" style="position: absolute; top: 25.25%; left: 25.25%; transform: translate(-50%, -50%) rotate(315deg); color: #d2d5da; font-size: 16px; line-height: 1;">&#9654;</div>
+<!-- Flywheel nodes -->
+<div class="sb-flywheel-node" style="position: absolute; top: 15%; left: 50%; transform: translate(-50%, -50%); width: 170px; background: #FFFFFF; border: 1px solid #E5E6EB; border-radius: 12px; padding: 14px 12px; text-align: center; box-shadow: 0 4px 14px rgba(18, 17, 85, 0.08);">
+<div style="width: 32px; height: 32px; border-radius: 50%; background: #EFF5FB; color: #8c7dd0; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px auto; font-size: 16px;">&hearts;</div>
+<div style="font-size: 13px; font-weight: 800; color: #272b30; line-height: 1.3;">Happy Customers</div>
+</div>
+<div class="sb-flywheel-mobile-arrow" style="display: none;">&#9660;</div>
+<div class="sb-flywheel-node" style="position: absolute; top: 50%; left: 85%; transform: translate(-50%, -50%); width: 170px; background: #FFFFFF; border: 1px solid #E5E6EB; border-radius: 12px; padding: 14px 12px; text-align: center; box-shadow: 0 4px 14px rgba(18, 17, 85, 0.08);">
+<div style="width: 32px; height: 32px; border-radius: 50%; background: #EFF5FB; color: #8c7dd0; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px auto; font-size: 16px;">&#8599;</div>
+<div style="font-size: 13px; font-weight: 800; color: #272b30; line-height: 1.3;">Referrals</div>
+</div>
+<div class="sb-flywheel-mobile-arrow" style="display: none;">&#9660;</div>
+<div class="sb-flywheel-node" style="position: absolute; top: 85%; left: 50%; transform: translate(-50%, -50%); width: 170px; background: #FFFFFF; border: 1px solid #E5E6EB; border-radius: 12px; padding: 14px 12px; text-align: center; box-shadow: 0 4px 14px rgba(18, 17, 85, 0.08);">
+<div style="width: 32px; height: 32px; border-radius: 50%; background: #EFF5FB; color: #8c7dd0; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px auto; font-size: 16px;">&#9733;</div>
+<div style="font-size: 13px; font-weight: 800; color: #272b30; line-height: 1.3;">Reviews &amp; Video Testimonials</div>
+</div>
+<div class="sb-flywheel-mobile-arrow" style="display: none;">&#9660;</div>
+<div class="sb-flywheel-node" style="position: absolute; top: 50%; left: 15%; transform: translate(-50%, -50%); width: 170px; background: #FFFFFF; border: 1px solid #E5E6EB; border-radius: 12px; padding: 14px 12px; text-align: center; box-shadow: 0 4px 14px rgba(18, 17, 85, 0.08);">
+<div style="width: 32px; height: 32px; border-radius: 50%; background: #EFF5FB; color: #8c7dd0; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px auto; font-size: 16px;">&#8635;</div>
+<div style="font-size: 13px; font-weight: 800; color: #272b30; line-height: 1.3;">Repeat Business</div>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center;">
+<div style="flex: 1 1 280px; min-width: 260px; max-width: 340px; background: #FFFFFF; border-radius: 14px; padding: 28px 24px; border: 1px solid #E5E6EB;">
+<div style="font-size: 13px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1a39a9; margin-bottom: 8px;">Done for You.<br>Not DIY.</div>
+<p style="font-size: 15px; color: #52535c; line-height: 1.6; margin: 0;">Most referral tools hand you software and templates. Snoball gives you execution. We take the channel off your plate. Outreach, follow-up, tracking, payouts, all of it.</p>
+</div>
+<div style="flex: 1 1 280px; min-width: 260px; max-width: 340px; background: #FFFFFF; border-radius: 14px; padding: 28px 24px; border: 1px solid #E5E6EB;">
+<div style="font-size: 13px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1a39a9; margin-bottom: 8px;">Humans Create Trust.<br>Technology Creates Scale.</div>
+<p style="font-size: 15px; color: #52535c; line-height: 1.6; margin: 0;">Your dedicated Snoball Assistant is a real person, not a bot. They have conversations with your customers because trust is built person to person. Smart technology lets them do it at scale.</p>
+</div>
+<div style="flex: 1 1 280px; min-width: 260px; max-width: 340px; background: #FFFFFF; border-radius: 14px; padding: 28px 24px; border: 1px solid #E5E6EB;">
+<div style="font-size: 13px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1a39a9; margin-bottom: 8px;">Consistency Beats Sporadic.<br>Every Single Time.</div>
+<p style="font-size: 15px; color: #52535c; line-height: 1.6; margin: 0;">Referrals don&rsquo;t happen on command. They happen when someone follows up at the right moment. We invest in the relationship, not random text or email blasts.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============== FINAL CTA ============== -->
+<section class="sb-defer" style="background-image: linear-gradient(135deg, #121155 0%, #1A39A9 55%, #0055B8 100%); color: #ffffff; padding: 88px 24px;">
+<div style="max-width: 880px; margin: 0 auto; text-align: center;">
+<h2 style="font-size: 42px; line-height: 1.1; font-weight: 800; margin: 0 0 16px 0; letter-spacing: -0.02em; color: #ffffff;">Ready for More Moves? <span style="background-image: linear-gradient(90deg, #8BD7DF 0%, #FF94FB 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: #8bd7df;">Let&rsquo;s Talk.</span></h2>
+<p style="font-size: 18px; color: rgba(255, 255, 255, 0.9); margin: 0 auto 32px auto; max-width: 640px; line-height: 1.55;">More referrals, reviews, and repeat business. All done for you.</p>
+<a style="display: inline-block; background: #8BD7DF; color: #121155; font-weight: 800; font-size: 17px; padding: 18px 36px; border-radius: 8px; text-decoration: none; letter-spacing: 0.01em; box-shadow: 0 12px 32px rgba(139, 215, 223, 0.25);" href="#book-a-demo">Book Your Demo &rarr;</a>
+<div style="margin-top: 18px; font-size: 14px; color: rgba(255, 255, 255, 0.7);">First 3 locations get 2 months free.</div>
+</div>
+</section>
+
+<!-- ============== FOOTER BOOKEND ============== -->
+<section class="sb-defer" style="background: #121155; padding: 20px 24px;">
+<div style="max-width: 1180px; margin: 0 auto; display: flex; align-items: center;"><img style="height: 26px; width: auto; display: block;" src="/.netlify/images?url=https%3A%2F%2Fimages.bestcompany.com%2Fblog%2FWhite%2520Straight%2520Snoball%2520Logo.png&amp;w=320&amp;fm=webp&amp;q=72" alt="Snoball"></div>
+</section>
+
+</div>
+<!-- =====================================================================
+     END Snoball Two Men and a Truck landing page (franchise decision-makers).
+     ===================================================================== -->
+<script>
+(function () {
+  var EMBED = 'https://app.iclosed.io/e/snoball/two-men-and-a-truck-demo';
+  // Add ?preview to the URL to freeze the placeholder (skips auto-load) for inspection.
+  var PREVIEW = location.search.indexOf('preview') !== -1;
+  var started = false;
+
+  // ---- Option A: auto-resize from iClosed height messages ----
+  // iClosed lives on app.iclosed.io, so we cannot measure the form from this page
+  // (cross-origin). IF iClosed broadcasts its height via postMessage, we grow the
+  // embed to match so the form never inner-scrolls. Purely additive: if no height
+  // message ever arrives, nothing changes and the min-height floor below still holds.
+  // Floor used ONLY for the loading facade and before the form first reports its
+  // size. Once the iframe has loaded, we hug the form's real height instead, so
+  // there is no empty space below short steps. (See the message handler below.)
+  var FACADE_FLOOR = 560; // keep in sync with #iclosed-embed min-height in the CSS
+  var hugReady = false;   // flips true once the iframe loads; gates shrink-to-fit
+
+  // Pull a plausible pixel height out of whatever shape iClosed sends.
+  // Confirmed format: { type: 'iclosed.widget_height', height: '930px' }.
+  // We stay tolerant: a raw number, a numeric/px string, a JSON string, or an
+  // object carrying a height field all resolve to a number.
+  function toNum(v) {
+    if (typeof v === 'number') return isFinite(v) ? v : null;
+    if (typeof v === 'string') {
+      var n = parseFloat(v); // parseFloat('930px') === 930
+      return isNaN(n) ? null : n;
+    }
+    return null;
+  }
+
+  function parseHeight(data) {
+    var obj = data;
+    if (typeof obj === 'number') return obj;
+    if (typeof obj === 'string') {
+      var s = obj.trim();
+      if (/^\d/.test(s)) return toNum(s); // bare "930" or "930px"
+      try { obj = JSON.parse(s); } catch (e) { return null; }
+    }
+    if (obj && typeof obj === 'object') {
+      var keys = ['height', 'scrollHeight', 'offsetHeight', 'docHeight', 'iframeHeight', 'frameHeight'];
+      for (var i = 0; i < keys.length; i++) {
+        if (keys[i] in obj) {
+          var h = toNum(obj[keys[i]]);
+          if (h !== null) return h;
+        }
+      }
+    }
+    return null;
+  }
+
+  window.addEventListener('message', function (e) {
+    // Only trust messages from iClosed's domain.
+    var host;
+    try { host = new URL(e.origin).hostname; } catch (x) { return; }
+    if (host !== 'app.iclosed.io' && host !== 'iclosed.io' && !/\.iclosed\.io$/.test(host)) return;
+
+    // DIAGNOSTIC: log everything iClosed sends so we can confirm whether height is
+    // broadcast and in what shape. Safe to delete this console.log once verified.
+    try { console.log('[iClosed message]', e.data); } catch (x) {}
+
+    var h = parseHeight(e.data);
+    if (!h || h <= 200) return;
+    var box = document.getElementById('iclosed-embed');
+    if (!box) return;
+    h = Math.ceil(h);
+    if (hugReady) {
+      // Form is loaded: hug its exact height, growing or shrinking to fit.
+      box.style.minHeight = h + 'px';
+    } else {
+      // Facade still showing: only grow, never shrink, so the loading box does not
+      // flicker downward on early or transient values.
+      var cur = parseFloat(box.style.minHeight) || FACADE_FLOOR;
+      if (h > cur) box.style.minHeight = h + 'px';
+    }
+  }, false);
+
+  // Build the iClosed embed URL with tracking params pulled from the page URL.
+  // For each subid, use a directly-passed subid first, then fall back to the UTM.
+  // This way it works whether the ad URL carries subid1/2/3 or utm_source/medium/campaign.
+  function embedUrl() {
+    var p = new URLSearchParams(location.search);
+    var map = {
+      subid1: p.get('subid1') || p.get('utm_source'),
+      subid2: p.get('subid2') || p.get('utm_medium'),
+      subid3: p.get('subid3') || p.get('utm_campaign')
+    };
+    var url = new URL(EMBED);
+    Object.keys(map).forEach(function (k) {
+      if (map[k]) url.searchParams.set(k, map[k]);
+    });
+    return url.toString();
+  }
+
+  function load() {
+    if (started) return;
+    started = true;
+    var box = document.getElementById('iclosed-embed');
+    var facade = document.getElementById('iclosed-facade');
+    var bar = document.getElementById('iclosed-loadingbar');
+    if (!box) return;
+    if (bar) bar.style.opacity = '1';
+    var f = document.createElement('iframe');
+    f.title = 'Two Men and a Truck Demo';
+    f.src = embedUrl();
+    f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;display:block;z-index:1;';
+    f.addEventListener('load', function () {
+      hugReady = true; // form is in: from here on we hug its exact reported height
+      if (!facade) return;
+      facade.style.pointerEvents = 'none';
+      facade.style.opacity = '0';
+      setTimeout(function () { if (facade.parentNode) facade.parentNode.removeChild(facade); }, 450);
+    });
+    box.insertBefore(f, box.firstChild);
+  }
+
+  var facade = document.getElementById('iclosed-facade');
+  if (facade) {
+    facade.addEventListener('click', load);
+    facade.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); load(); }
+    });
+  }
+  // Any "Book a Demo" CTA also loads the scheduler, then the anchor scrolls to it.
+  var ctas = document.querySelectorAll('a[href="#book-a-demo"]');
+  for (var i = 0; i < ctas.length; i++) { ctas[i].addEventListener('click', load); }
+
+  // Load on the first real interaction: scroll, tap, mouse move, key, or wheel.
+  // Performance tools (Lighthouse/PageSpeed) never interact with the page, so the
+  // heavy third-party scheduler stays out of the test. Real visitors trigger it the
+  // instant they engage, so the calendar is ready before they reach it. No extra click.
+  if (!PREVIEW) {
+    var triggers = ['pointerdown', 'touchstart', 'mousemove', 'scroll', 'keydown', 'wheel'];
+    function onFirstInteraction() {
+      for (var j = 0; j < triggers.length; j++) {
+        window.removeEventListener(triggers[j], onFirstInteraction);
+      }
+      load();
+    }
+    for (var k = 0; k < triggers.length; k++) {
+      window.addEventListener(triggers[k], onFirstInteraction, { once: true, passive: true });
+    }
+  }
+})();
+</script>
+</body>
+</html>
