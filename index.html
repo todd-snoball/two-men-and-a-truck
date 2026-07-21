@@ -257,7 +257,7 @@ html, body {
 <!-- "Book Demo & Get $200" callout -->
 <div class="sb-book-callout" style="position: absolute; top: -30px; left: 40px; z-index: 4;"><span style="display: inline-block; background: #8BD7DF; color: #121155; font-weight: 800; font-size: 18px; padding: 12px 22px; border-radius: 24px; box-shadow: 0 12px 26px rgba(18, 17, 85, 0.28); white-space: nowrap; transform: rotate(-4deg);">Book Demo &amp; Get $200</span><svg width="92" height="82" viewBox="0 0 92 82" fill="none" aria-hidden="true" style="display: block; margin: 2px 0 0 34px;"><path d="M50 6 C 26 26, 22 58, 60 72" stroke="#8BD7DF" stroke-width="5" fill="none" stroke-linecap="round"></path><path d="M60 72 L46 72" stroke="#8BD7DF" stroke-width="5" fill="none" stroke-linecap="round"></path><path d="M60 72 L55 58" stroke="#8BD7DF" stroke-width="5" fill="none" stroke-linecap="round"></path></svg></div>
 <div id="book-a-demo" style="background: #FFFFFF; border-radius: 14px; padding: 8px; box-shadow: 0 24px 60px rgba(18, 17, 85, 0.45); border: 1px solid rgba(255, 255, 255, 0.06);">
-<div id="iclosed-embed" style="position: relative; border-radius: 10px; overflow: hidden; background: #FFFFFF; min-height: 560px;"><!-- The real iClosed iframe is injected here by JS, behind this facade. -->
+<div id="iclosed-embed" style="position: relative; border-radius: 10px; overflow: hidden; background: #FFFFFF; min-height: 620px;"><!-- The real iClosed iframe is injected here by JS, behind this facade. -->
 <!-- Facade: a non-typeable look-alike of the iClosed two-pane form so the swap is seamless. -->
 <div id="iclosed-facade" role="button" tabindex="0" aria-label="Open the booking scheduler" style="position: absolute; inset: 0; z-index: 2; background: #FFFFFF; cursor: pointer; overflow: hidden; display: flex; flex-direction: column; transition: opacity 0.35s ease;">
 <div id="iclosed-loadingbar"></div>
@@ -499,7 +499,7 @@ html, body {
      ===================================================================== -->
 <script>
 (function () {
-  var EMBED = 'https://app.iclosed.io/e/snoball/two-men-and-a-truck-demo';
+  var EMBED = 'https://app.iclosed.io/e/snoball/snoball-30-min-demo';
   // Add ?preview to the URL to freeze the placeholder (skips auto-load) for inspection.
   var PREVIEW = location.search.indexOf('preview') !== -1;
   var started = false;
@@ -512,7 +512,7 @@ html, body {
   // Floor used ONLY for the loading facade and before the form first reports its
   // size. Once the iframe has loaded, we hug the form's real height instead, so
   // there is no empty space below short steps. (See the message handler below.)
-  var FACADE_FLOOR = 560; // keep in sync with #iclosed-embed min-height in the CSS
+  var FACADE_FLOOR = 620; // keep in sync with #iclosed-embed min-height in the CSS
   var hugReady = false;   // flips true once the iframe loads; gates shrink-to-fit
 
   // Pull a plausible pixel height out of whatever shape iClosed sends.
@@ -600,7 +600,7 @@ html, body {
     if (!box) return;
     if (bar) bar.style.opacity = '1';
     var f = document.createElement('iframe');
-    f.title = 'Two Men and a Truck Demo';
+    f.title = 'Snoball 30 min. Demo';
     f.src = embedUrl();
     f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;display:block;z-index:1;';
     f.addEventListener('load', function () {
